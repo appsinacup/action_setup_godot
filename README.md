@@ -1,14 +1,9 @@
 # Setup Godot Action
 
-<p align = "center">
-    <strong>
-        <a href="https://appsinacup.com">Website</a> | <a href="https://discord.gg/56dMud8HYn">Discord</a>
-    </strong>
-</p>
+|[Website](https://appsinacup.com)|[Discord](https://discord.gg/56dMud8HYn)|
+|-|-|
 
-<p align = "center">
-    <img src="https://github.com/appsinacup/action_setup_godot/blob/main/docs/example.png?raw=true"/>
-</p>
+![example](docs/example.png)
 
 Sets up the Godot Engine from the official GitHub releases for Linux, macOS, or Windows.
 
