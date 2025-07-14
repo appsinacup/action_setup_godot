@@ -1,4 +1,4 @@
-# Setup Godot Engine GitHub Action
+# Setup Godot Action
 
 This GitHub Action sets up the Godot Engine from the official GitHub releases for Linux, macOS, or Windows. It automatically downloads, extracts, and makes the Godot binary available in your workflow.
 
