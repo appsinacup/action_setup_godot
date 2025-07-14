@@ -44,5 +44,6 @@ jobs:
           version: '4.4.1-stable'
           platform: 'win64.exe'
       - name: Check Godot version
+        shell: pwsh
         run: |
-          $GODOT4 --version
+          & $env:GODOT4 --version
