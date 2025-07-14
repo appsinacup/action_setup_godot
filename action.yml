@@ -1,0 +1,44 @@
+name: Setup Godot Engine
+
+description: 'GitHub Action to setup Godot Engine from official GitHub releases.'
+
+inputs:
+  version:
+    description: 'Godot version (e.g. 4.4-stable)'
+    required: true
+  platform:
+    description: 'Platform (e.g. macos.universal, linux.x86_64, win64.exe)'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Download Godot release
+      shell: bash
+      run: |
+        GODOT_VERSION=${{ inputs.version }}
+        GODOT_PLATFORM=${{ inputs.platform }}
+        GODOT_ARCH=${{ inputs.arch }}
+        https://github.com/godotengine/godot/releases/download/4.4-stable/Godot_v4.4-stable_linux.x86_64.zip
+        GODOT_RELEASE_URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_${GODOT_PLATFORM}.zip"
+        echo "Downloading $GODOT_RELEASE_URL"
+        curl -L "$GODOT_RELEASE_URL" -o godot.zip
+        unzip godot.zip -d godot-bin
+        chmod -R +x godot-bin/*
+        # Find the Godot binary depending on platform
+        GODOT_BIN_PATH=""
+        if [[ "$GODOT_PLATFORM" == macos* ]]; then
+          # macOS: Godot.app/Contents/MacOS/Godot
+          GODOT_BIN_PATH=$(find godot-bin -type f -path "*/Godot.app/Contents/MacOS/Godot" | head -n 1)
+        elif [[ "$GODOT_PLATFORM" == win* ]]; then
+          # Windows: prefer _console.exe if present, else .exe
+          GODOT_BIN_PATH=$(find godot-bin -type f -name "*_console.exe" | head -n 1)
+          if [[ -z "$GODOT_BIN_PATH" ]]; then
+            GODOT_BIN_PATH=$(find godot-bin -type f -name "*.exe" | head -n 1)
+          fi
+        else
+          # Linux: single binary
+          GODOT_BIN_PATH=$(find godot-bin -type f -executable -name "Godot*" | head -n 1)
+        fi
+        echo "GODOT4=$GODOT_BIN_PATH" >> $GITHUB_ENV
+        echo "$(dirname $GODOT_BIN_PATH)" >> $GITHUB_PATH
