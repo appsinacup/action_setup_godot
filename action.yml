@@ -19,7 +19,6 @@ runs:
         GODOT_VERSION=${{ inputs.version }}
         GODOT_PLATFORM=${{ inputs.platform }}
         GODOT_ARCH=${{ inputs.arch }}
-        https://github.com/godotengine/godot/releases/download/4.4-stable/Godot_v4.4-stable_linux.x86_64.zip
         GODOT_RELEASE_URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_${GODOT_PLATFORM}.zip"
         echo "Downloading $GODOT_RELEASE_URL"
         curl -L "$GODOT_RELEASE_URL" -o godot.zip
