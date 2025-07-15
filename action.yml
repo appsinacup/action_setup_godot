@@ -50,12 +50,12 @@ runs:
           if [[ "$MONO" == "true" ]]; then
             # Linux mono uses _ instead of . in platform
             if [ "$GODOT_PLATFORM" == "linux.x86_64" ]; then
-              GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}-mono_linux_x86_64.zip"
+              GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}_mono_linux_x86_64.zip"
             # Windows mono uses win64 (not win64.exe) in filename
             elif [ "$GODOT_PLATFORM" == "win64.exe" ]; then
-              GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}-mono_win64.zip"
+              GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}_mono_win64.zip"
             else
-              GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}-mono_${GODOT_PLATFORM}.zip"
+              GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}_mono_${GODOT_PLATFORM}.zip"
             fi
           else
             GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}_${GODOT_PLATFORM}.zip"
