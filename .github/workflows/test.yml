@@ -35,6 +35,15 @@ jobs:
       - name: Check Godot mono version
         run: |
           $GODOT4 --version || echo "Mono binary not found"
+      - name: Setup Godot (mono + templates)
+        uses: ./
+        with:
+          version: '4.4.1-stable'
+          mono: 'true'
+          download_template: 'true'
+      - name: Check mono templates
+        run: |
+          ls godot-bin/templates || echo "No mono templates found"
   test-godot-setup-macos:
     runs-on: macos-latest
     steps:
@@ -63,6 +72,15 @@ jobs:
       - name: Check Godot mono version
         run: |
           $GODOT4 --version || echo "Mono binary not found"
+      - name: Setup Godot (mono + templates)
+        uses: ./
+        with:
+          version: '4.4.1-stable'
+          mono: 'true'
+          download_template: 'true'
+      - name: Check mono templates
+        run: |
+          ls godot-bin/templates || echo "No mono templates found"
   test-godot-setup-windows:
     runs-on: windows-latest
     steps:
@@ -94,3 +112,13 @@ jobs:
         shell: pwsh
         run: |
           & $env:GODOT4 --version || Write-Host "Mono binary not found"
+      - name: Setup Godot (mono + templates)
+        uses: ./
+        with:
+          version: '4.4.1-stable'
+          mono: 'true'
+          download_template: 'true'
+      - name: Check mono templates
+        shell: pwsh
+        run: |
+          Get-ChildItem godot-bin/templates -ErrorAction SilentlyContinue
