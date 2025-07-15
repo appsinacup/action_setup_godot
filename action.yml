@@ -48,7 +48,7 @@ runs:
           fi
           # Determine if mono build is needed
           if [[ "$MONO" == "true" ]]; then
-            GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}-mono_${GODOT_PLATFORM}.zip"
+            GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}_mono_${GODOT_PLATFORM}.zip"
           else
             GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}_${GODOT_PLATFORM}.zip"
           fi
@@ -91,7 +91,7 @@ runs:
           echo "Unknown OS: ${{ runner.os }}"; exit 1
         fi
         if [[ "$MONO" == "true" ]]; then
-          GODOT_TEMPLATE_NAME="Godot_v${GODOT_VERSION}-mono_export_templates.tpz"
+          GODOT_TEMPLATE_NAME="Godot_v${GODOT_VERSION}_mono_export_templates.tpz"
         else
           GODOT_TEMPLATE_NAME="Godot_v${GODOT_VERSION}_export_templates.tpz"
         fi
