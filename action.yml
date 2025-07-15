@@ -115,28 +115,20 @@ runs:
         version_dot=$(echo "$GODOT_VERSION" | sed 's/-/./')
         echo "Unzipping template"
         echo "Version dot: $version_dot"
+        # Set export path based on platform
         if [[ "$PLATFORM" == "macos" ]]; then
-          mkdir -p "/Users/runner/Library/Application Support/Godot/export_templates/$version_dot"
-          unzip -o "$BIN_PATH/templates/$file" -d "/Users/runner/Library/Application Support/Godot/export_templates/$version_dot"
-          ls "/Users/runner/Library/Application Support/Godot/export_templates/$version_dot"
-          echo "GODOT_TEMPLATE=\"/Users/runner/Library/Application Support/Godot/export_templates/$version_dot\"" >> $GITHUB_ENV
+          EXPORT_PATH="/Users/runner/Library/Application Support/Godot/export_templates/$version_dot"
         elif [[ "$PLATFORM" == "linux" ]]; then
-          mkdir -p $HOME/.local/share/godot/export_templates/$version_dot
-          unzip -o "$BIN_PATH/templates/$file" -d $HOME/.local/share/godot/export_templates/$version_dot
-          ls $HOME/.local/share/godot/export_templates/$version_dot
-          echo "GODOT_TEMPLATE=$HOME/.local/share/godot/export_templates/$version_dot" >> $GITHUB_ENV
+          EXPORT_PATH="$HOME/.local/share/godot/export_templates/$version_dot"
         else
-          mkdir -p "$HOME/AppData/Roaming/Godot/export_templates/$version_dot"
-          unzip -o "$BIN_PATH/templates/$file" -d "$HOME/AppData/Roaming/Godot/export_templates/$version_dot"
-          ls "$HOME/AppData/Roaming/Godot/export_templates/$version_dot"
-          echo "GODOT_TEMPLATE=\"$HOME/AppData/Roaming/Godot/export_templates/$version_dot\"" >> $GITHUB_ENV
+          EXPORT_PATH="$HOME/AppData/Roaming/Godot/export_templates/$version_dot"
         fi
-    - name: Check templates are present
-      shell: bash
-      run: |
-        if [[ -d "$BIN_PATH/templates" ]]; then
-          echo "Templates directory exists"
-          ls "$BIN_PATH/templates"
-        else
-          echo "Templates directory does not exist"
+        mkdir -p "$EXPORT_PATH"
+        unzip -o "$BIN_PATH/templates/$file" -d "$EXPORT_PATH"
+        # Move up all files from templates/ if present
+        if [ -d "$EXPORT_PATH/templates" ]; then
+          mv "$EXPORT_PATH/templates"/* "$EXPORT_PATH/"
+          rmdir "$EXPORT_PATH/templates"
         fi
+        ls "$EXPORT_PATH"
+        echo "GODOT_TEMPLATE=\"$EXPORT_PATH\"" >> $GITHUB_ENV
