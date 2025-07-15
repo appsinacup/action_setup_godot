@@ -131,4 +131,4 @@ runs:
           rmdir "$EXPORT_PATH/templates"
         fi
         ls "$EXPORT_PATH"
-        echo "GODOT_TEMPLATE=\"$EXPORT_PATH\"" >> $GITHUB_ENV
+        echo "GODOT_TEMPLATE=$EXPORT_PATH" >> $GITHUB_ENV
