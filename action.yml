@@ -112,12 +112,9 @@ runs:
         echo "Downloading $GODOT_TEMPLATE_URL"
         curl -L "$GODOT_TEMPLATE_URL" -o "$BIN_PATH/templates/$GODOT_TEMPLATE_NAME"
         file=$(ls "$BIN_PATH/templates")
-        if [[ "$GODOT_VERSION" != *-* ]]; then
-          version_dot="$GODOT_VERSION.release"
-        else
-          version_dot=$(echo "$GODOT_VERSION" | sed 's/-/./')
-        fi
+        version_dot=$(echo "$GODOT_VERSION" | sed 's/-/./')
         echo "Unzipping template"
+        echo "Version dot: $version_dot"
         if [[ "$PLATFORM" == "macos" ]]; then
           mkdir -p "/Users/runner/Library/Application Support/Godot/export_templates/$version_dot"
           unzip -o "$BIN_PATH/templates/$file" -d "/Users/runner/Library/Application Support/Godot/export_templates/$version_dot"
@@ -133,4 +130,13 @@ runs:
           unzip -o "$BIN_PATH/templates/$file" -d "$HOME/AppData/Roaming/Godot/export_templates/$version_dot"
           ls "$HOME/AppData/Roaming/Godot/export_templates/$version_dot"
           echo "GODOT_TEMPLATE=\"$HOME/AppData/Roaming/Godot/export_templates/$version_dot\"" >> $GITHUB_ENV
+        fi
+    - name: Check templates are present
+      shell: bash
+      run: |
+        if [[ -d "$BIN_PATH/templates" ]]; then
+          echo "Templates directory exists"
+          ls "$BIN_PATH/templates"
+        else
+          echo "Templates directory does not exist"
         fi
