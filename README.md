@@ -27,7 +27,6 @@ Sets up the Godot Engine from the official GitHub releases for Linux, macOS, or 
   uses: appsinacup/setup-godot-action@main
   with:
     version: '4.4.1-stable'
-    platform: 'linux.x86_64'
 
 - name: Check Godot version
   run: |
