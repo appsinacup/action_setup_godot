@@ -64,7 +64,7 @@ jobs:
         uses: ./
         with:
           version: '4.4.1-stable'
-          release-tag: '1.2.3'
+          release-tag: '1.2.4'
           repo: 'appsinacup/action_godot_builder'
       - name: Check Godot version
         shell: pwsh
@@ -74,7 +74,7 @@ jobs:
         uses: ./
         with:
           version: '4.4.1-stable'
-          release-tag: '1.2.3'
+          release-tag: '1.2.4'
           repo: 'appsinacup/action_godot_builder'
           download_template: 'true'
       - name: Check templates
