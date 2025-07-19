@@ -68,7 +68,7 @@ runs:
           else
             GODOT_EDITOR_NAME="Godot_v${GODOT_VERSION}_${GODOT_PLATFORM}.zip"
           fi
-          GODOT_RELEASE_URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/$GODOT_EDITOR_NAME"
+          GODOT_RELEASE_URL="https://github.com/${{ inputs.repo }}/releases/download/${GODOT_VERSION}/$GODOT_EDITOR_NAME"
           echo "Downloading $GODOT_RELEASE_URL"
           curl -L "$GODOT_RELEASE_URL" -o godot_editor.zip
           unzip -o godot_editor.zip -d "$BIN_PATH"
@@ -111,7 +111,7 @@ runs:
         else
           GODOT_TEMPLATE_NAME="Godot_v${GODOT_VERSION}_export_templates.tpz"
         fi
-        GODOT_TEMPLATE_URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/$GODOT_TEMPLATE_NAME"
+        GODOT_TEMPLATE_URL="https://github.com/${{ inputs.repo }}/releases/download/${GODOT_VERSION}/$GODOT_TEMPLATE_NAME"
         echo "Downloading $GODOT_TEMPLATE_URL"
         curl -L "$GODOT_TEMPLATE_URL" -o "$BIN_PATH/templates/$GODOT_TEMPLATE_NAME"
         file=$(ls "$BIN_PATH/templates")
