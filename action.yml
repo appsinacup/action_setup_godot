@@ -3,6 +3,9 @@ name: Setup Godot Engine
 description: 'GitHub Action to setup Godot Engine from official GitHub releases.'
 
 inputs:
+  repo:
+    description: 'Repository to download Godot from (default: godotengine/godot)'
+    default: 'godotengine/godot'
   version:
     description: 'Godot version (e.g. 4.4-stable)'
     required: true
