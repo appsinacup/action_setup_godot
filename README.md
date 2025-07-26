@@ -46,8 +46,4 @@ For custom Godot Release:
     version: '4.4.1-stable'
     release-tag: '3d-disable'
     repo: 'appsinacup/action_godot_builder'
-
-- name: Check Godot version
-  run: |
-    $GODOT4 --version
 ```
