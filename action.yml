@@ -93,9 +93,15 @@ runs:
           else
             GODOT_BIN_PATH=$(find "$BIN_PATH" -type f -executable -name "Godot*" | head -n 1)
           fi
-          echo "GODOT4=$GODOT_BIN_PATH" >> $GITHUB_ENV
-          echo "GODOT4_BIN=$GODOT_BIN_PATH" >> $GITHUB_ENV
-          echo "$(dirname $GODOT_BIN_PATH)" >> $GITHUB_PATH
+          # Convert to absolute path (portable way)
+          if [[ "$GODOT_BIN_PATH" != /* ]]; then
+            GODOT_BIN_PATH_ABS="$(pwd)/$GODOT_BIN_PATH"
+          else
+            GODOT_BIN_PATH_ABS="$GODOT_BIN_PATH"
+          fi
+          echo "GODOT4=$GODOT_BIN_PATH_ABS" >> $GITHUB_ENV
+          echo "GODOT4_BIN=$GODOT_BIN_PATH_ABS" >> $GITHUB_ENV
+          echo "$(dirname "$GODOT_BIN_PATH_ABS")" >> $GITHUB_PATH
         fi
     - name: Download and Setup Godot Templates
       shell: bash
