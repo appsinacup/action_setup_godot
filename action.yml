@@ -94,6 +94,7 @@ runs:
             GODOT_BIN_PATH=$(find "$BIN_PATH" -type f -executable -name "Godot*" | head -n 1)
           fi
           echo "GODOT4=$GODOT_BIN_PATH" >> $GITHUB_ENV
+          echo "GODOT4_BIN_PATH=$GODOT_BIN_PATH" >> $GITHUB_ENV
           echo "$(dirname $GODOT_BIN_PATH)" >> $GITHUB_PATH
         fi
     - name: Download and Setup Godot Templates
