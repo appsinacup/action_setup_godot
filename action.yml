@@ -143,13 +143,18 @@ runs:
         version_dot=$(echo "$GODOT_VERSION" | sed 's/-/./')
         echo "Unzipping template"
         echo "Version dot: $version_dot"
-        # Set export path based on platform
+        # Set export path based on platform (use HOME / APPDATA, avoid hardcoded /Users)
         if [[ "$PLATFORM" == "macos" ]]; then
-          EXPORT_PATH="/Users/runner/Library/Application Support/Godot/export_templates/$version_dot"
+          EXPORT_PATH="$HOME/Library/Application Support/Godot/export_templates/$version_dot"
         elif [[ "$PLATFORM" == "linux" ]]; then
           EXPORT_PATH="$HOME/.local/share/godot/export_templates/$version_dot"
         else
-          EXPORT_PATH="$HOME/AppData/Roaming/Godot/export_templates/$version_dot"
+          # On Windows prefer APPDATA, fallback to HOME
+          if [ -n "$APPDATA" ]; then
+            EXPORT_PATH="$APPDATA/Godot/export_templates/$version_dot"
+          else
+            EXPORT_PATH="$HOME/AppData/Roaming/Godot/export_templates/$version_dot"
+          fi
         fi
         mkdir -p "$EXPORT_PATH"
         unzip -o "$BIN_PATH/templates/$file" -d "$EXPORT_PATH"
