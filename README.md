@@ -1,6 +1,6 @@
 # Setup Godot Action
 
-|[Website](https://appsinacup.com)|[Discord](https://discord.gg/56dMud8HYn)|
+|[Website](https://appsinacup.com)|[Discord](https://discord.com/invite/v649emcpAu)|
 |-|-|
 
 ![example](docs/example.png)
